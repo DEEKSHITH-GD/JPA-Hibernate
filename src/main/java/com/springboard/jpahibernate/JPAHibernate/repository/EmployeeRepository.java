@@ -32,9 +32,9 @@ public class EmployeeRepository {
 		return em.createQuery("select e from Employee e", Employee.class).getResultList(); //Retrieves all employees
 	}
 	public List<PartTimeEmployee> retrieveAllPartTimeEmployees(){
-		return em.createQuery("select e from PartTimeEmployees e", PartTimeEmployee.class).getResultList(); //Retrieves all part time employees
+		return em.createQuery("select p from PartTimeEmployees p", PartTimeEmployee.class).getResultList(); //Retrieves all part time employees
 	}
 	public List<FullTimeEmployee> retrieveAllFullTimeEmployees(){
-		return em.createQuery("select e from FullTimeEmployees e", FullTimeEmployee.class).getResultList(); //Retrieves all full time employees
+		return em.createQuery("select f from FullTimeEmployees f", FullTimeEmployee.class).getResultList(); //Retrieves all full time employees
 	}
 }

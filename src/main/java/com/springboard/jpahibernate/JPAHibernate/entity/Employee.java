@@ -52,6 +52,6 @@ public abstract class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + "]";
+		return String.format("Employee[%s]", name);
 	}
 }

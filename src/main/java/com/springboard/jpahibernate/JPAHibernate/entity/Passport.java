@@ -48,7 +48,7 @@ public class Passport {
 
 	@Override
 	public String toString() {
-		return "Passport [id=" + id + ", number=" + number + "]";
+		return String.format("Passport[%s]", number);
 	}
 	
 }

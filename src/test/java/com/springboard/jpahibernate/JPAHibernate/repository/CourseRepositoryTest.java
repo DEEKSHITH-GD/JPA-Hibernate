@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ class CourseRepositoryTest {
 	
 	@Autowired
 	EntityManager em;
-	/*
+	
 	@Test
 	public void findByIdBasicTest() {
 		Course course = repository.findById(1);
@@ -112,7 +113,7 @@ class CourseRepositoryTest {
 		List<Course> resultList5 = query2.getResultList();
 		logger.info("Select c from Course c where name like '%H%' -> {}", resultList5);
 	}
-	*/
+	
 	@Test
 	@Transactional
 	public void retrieveReviews() {
@@ -126,4 +127,17 @@ class CourseRepositoryTest {
 		Review review = em.find(Review.class, 1L);
 		logger.info("{}", review.getCourse());
 	}
+	
+	//Caching
+		@Test
+		@Transactional //provides first level cache by default
+		public void findCourseFirstLevelCache() {
+			Course course1 = repository.findById(1L);
+			logger.info("First course retrieved->{}", course1);
+			Course course2 = repository.findById(1L);
+			logger.info("First course retrieved again->{}", course2);
+			
+			assertEquals("Microservices", course1.getName());
+			assertEquals("Microservices", course2.getName());
+		}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,10 @@ public class Student {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Passport passport;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@Embedded
+	private Address address;
+	
+	@ManyToMany
 	@JoinTable(name="STUDENT_COURSE",
 			joinColumns = @JoinColumn(name="STUDENT_ID"), //Join column
 			inverseJoinColumns = @JoinColumn(name="COURSE_ID") //inverse Join column
@@ -71,8 +75,16 @@ public class Student {
 		this.courses.add(course);
 	}
 
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", passport=" + passport + ", courses=" + courses + "]";
+		return String.format("Student[%s]", name);
 	}
 }

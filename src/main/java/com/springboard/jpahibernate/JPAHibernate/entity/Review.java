@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -18,7 +20,9 @@ public class Review {
 	@GeneratedValue
 	private Long id;
 	private String description;
-	private String rating;
+	
+	@Enumerated(EnumType.STRING)
+	private ReviewRating rating;
 	
 	@ManyToOne
 	private Course course;
@@ -26,7 +30,7 @@ public class Review {
 	protected Review() {
 	}
 	
-	public Review(String rating,String description) {
+	public Review(ReviewRating rating,String description) {
 		this.rating = rating;
 		this.description = description;
 	}
@@ -51,16 +55,16 @@ public class Review {
 		return id;
 	}
 	
-	public String getRating() {
+	public ReviewRating getRating() {
 		return rating;
 	}
 
-	public void setRating(String rating) {
+	public void setRating(ReviewRating rating) {
 		this.rating = rating;
 	}
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", description=" + description + ", rating=" + rating + ", course=" + course + "]";
+		return String.format("Review[%s]", description);
 	}
 }

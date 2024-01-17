@@ -3,12 +3,13 @@ create table course (
     id bigint primary key,
     name varchar(255),
     create_date datetime,
-    last_updated_date datetime
+    last_updated_date datetime,
+    is_deleted boolean
 );
 
-insert into course(id, name, create_date, last_updated_date) values(10001, 'JPA-Hibernate', now(), now());
-insert into course(id, name, create_date, last_updated_date) values(10002, 'Spring Boot', now(), now());
-insert into course(id, name, create_date, last_updated_date) values(10003, 'Microservices', now(), now());
+insert into course(id, name, create_date, last_updated_date, is_deleted) values(10001, 'JPA-Hibernate', now(), now(), false);
+insert into course(id, name, create_date, last_updated_date, is_deleted) values(10002, 'Spring Boot', now(), now(), false);
+insert into course(id, name, create_date, last_updated_date, is_deleted) values(10003, 'Microservices', now(), now(), false);
 commit;
 
 create table passport (
@@ -39,6 +40,6 @@ create table review (
     foreign key(course_id) references course(id)
 );
 
-insert into review(id,rating,description,course_id)  values(50001, '5', 'Great course',10001);
-insert into review(id,rating,description,course_id)  values(50002, '4', 'Wonderful course',10002);
-insert into review(id,rating,description,course_id)  values(50003, '5', 'Excellent',10003);
+insert into review(id,rating,description,course_id)  values(50001, 'FIVE', 'Great course',10001);
+insert into review(id,rating,description,course_id)  values(50002, 'FOUR', 'Wonderful course',10002);
+insert into review(id,rating,description,course_id)  values(50003, 'FIVE', 'Excellent',10003);
