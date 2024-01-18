@@ -24,8 +24,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PreRemove;
 
 @Entity
-@NamedQuery(name= "get_the_course_list", query="select c from Course c")
+//@NamedQuery(name= "get_the_course_list", query="select c from Course c")
 @NamedQueries(value= {@NamedQuery(name= "get_the_course_list", query="select c from Course c"),
+		@NamedQuery(name= "get_all_course_Join_fetch", query="select c from Course c JOIN FETCH c.students s"),
 			  @NamedQuery(name= "get_the_course_where", query="Select c from Course c where name like '%H%'")})
 @Cacheable
 @SQLDelete(sql= "update course set is_deleted=true where id=?")
@@ -42,7 +43,7 @@ public class Course {
 	@OneToMany(mappedBy = "course")
 	private List<Review> reviews = new ArrayList<Review>();
 	
-	@ManyToMany//(mappedBy = "course")
+	@ManyToMany(mappedBy = "course")
 	@JsonIgnore
 	private List<Student> students = new ArrayList<Student>();
 	
